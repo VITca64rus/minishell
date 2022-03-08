@@ -1,75 +1,55 @@
-
-// #include <unistd.h>
-// #include <term.h>
-// #include <string.h>
-// #include <stdio.h>
-// #include "libft/libft.h"
-
-// int	ft_putchar(int c)
-// {
-// 	write(1, &c, 1);
-// 	return (0);
-// }
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <readline/readline.h>
 #include<readline/history.h>
+#include <unistd.h>
 
-#define CLOSE "\001\033[0m\002"                 // Закрыть все свойства
-#define BLOD  "\001\033[1m\002"                 // Подчеркнуть, жирным шрифтом, выделить
-#define BEGIN(x,y) "\001\033["#x";"#y"m\002" 
-
-int main()
+void ft_builtins(char *str, char **env)
 {
-	while(1)
+	if (!strcmp(str, "exit"))
 	{
-		char * str = readline(BEGIN(49, 34)"Myshell $ "CLOSE);
-		add_history(str);
 		free(str);
+		exit(0);
+	}
+	else if (!strncmp(str, "echo ", 5))
+	{
+		if (!strncmp(str, "echo -n ", 8))
+			write(1, &str[8], strlen(&str[8]));
+		else
+		{
+			write(1, &str[5], strlen(&str[5]));
+			write(1, "\n", 1);
+		}
+	}
+	else if (!strcmp(str, "env"))
+	{
+		while (*env)
+		{
+			write(1, *env, strlen(*env));
+			write(1, "\n", 1);
+			env++;
+		}
 	}
 }
 
-// int	main(int argc, char **argv, char **env)
-// {
-// 	char			str[200];
-// 	int				len;
-// 	struct termios	term;
-// 	char			*term_name = "xterm-256color"; //FIX_me for another term (env TERM=)
+int main(int argc, char **argv, char **env)
+{
+	char	*str;
 
-// 	tcgetattr(0, &term);
-// 	term.c_lflag &= ~(ECHO);
-// 	term.c_lflag &= ~(ICANON);
-// 	tcsetattr(0, TCSANOW, &term);
-
-// 	tgetent(0, term_name);
-// 	tputs(save_cursor, 1, ft_putchar);
-// 	while (strcmp(str, "\4"))
-// 	{
-// 		do
-// 		{
-// 			len = read(0, str, 100);
-// 			str[len] = 0;
-// 			if (!strcmp(str, "\e[A"))
-// 			{
-// 				tputs(restore_cursor, 1, ft_putchar);
-// 				tputs(tigetstr("ed"), 1, ft_putchar);
-// 				printf("previous\n");
-// 			}
-// 			else if (!strcmp(str, "\e[B"))
-// 			{
-// 				tputs(restore_cursor, 1, ft_putchar);
-// 				tputs(tigetstr("ed"), 1, ft_putchar); // FIX_ME - potential forbiden tigetstr
-// 				printf("next\n");
-// 			}
-// 			else if (!strcmp(str, key_backspace) && !strcmp(str, "\177"))
-// 			{
-// 				tputs(cursor_left, 1, ft_putchar);
-// 				tputs(tgetstr("dc", 0), 1, ft_putchar); // FIX_ME - potential forbiden tgetstr
-// 			}
-// 			else
-// 				write(1, str, len);
-// 		} while (strcmp(str, "\n") && strcmp(str, "\4"));
-// 	}
-//     return(0);
-// }
+	while(1)
+	{
+		str = NULL;
+		str = readline("\033[32mminishell> \033[0m");
+		if (str)
+		{
+			if (*str)
+				add_history(str);
+			ft_builtins(str, env);
+			//another operation next
+			free(str);
+		}
+		else
+			break;
+	}
+	write(1, "\n", 1);
+}
