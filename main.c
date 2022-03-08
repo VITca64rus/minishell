@@ -1,4 +1,3 @@
-//natasha
 #include <unistd.h>
 #include <term.h>
 #include <string.h>
