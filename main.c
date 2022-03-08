@@ -30,6 +30,7 @@ int	main(int argc, char **argv, char **env)
 		do
 		{
 			len = read(0, str, 100);
+			str[len] = 0;
 			if (!strcmp(str, "\e[A"))
 			{
 				tputs(restore_cursor, 1, ft_putchar);
@@ -42,10 +43,10 @@ int	main(int argc, char **argv, char **env)
 				tputs(tigetstr("ed"), 1, ft_putchar); // FIX_ME - potential forbiden tigetstr
 				printf("next\n");
 			}
-			else if (!strcmp(str, key_backspace))
+			else if (!strcmp(str, key_backspace) && !strcmp(str, "\177"))
 			{
 				tputs(cursor_left, 1, ft_putchar);
-				tputs(tigetstr("ed"), 1, ft_putchar); // FIX_ME - potential forbiden tigetstr
+				tputs(tgetstr("dc", 0), 1, ft_putchar); // FIX_ME - potential forbiden tgetstr
 			}
 			else
 				write(1, str, len);
