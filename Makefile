@@ -1,5 +1,5 @@
 all:
 	make -C libft
-	gcc libft/libft.a *.c -ltermcap -lreadline
+	gcc *.c libft/libft.a -ltermcap -lreadline
 clean:
 	make clean -C libft

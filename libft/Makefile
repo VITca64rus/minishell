@@ -6,7 +6,7 @@
 #    By: sazelda <sazelda@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/22 23:13:38 by hvayon            #+#    #+#              #
-#    Updated: 2022/03/06 14:52:48 by sazelda          ###   ########.fr        #
+#    Updated: 2022/03/09 11:34:30 by sazelda          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,7 @@ NAMES			= ft_memset.c ft_bzero.c ft_memcpy.c\
 					ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c\
 					ft_strtrim.c ft_strtrim.c ft_striteri.c\
 
-BONUS_NAMES		= 	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
-			 		ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c\
-
 OBJS			= $(NAMES:.c=.o)
-BONUS_OBJS		= $(BONUS_NAMES:.c=.o)
 
 CC				= gcc
 CFLAGS			= #-Wall -Wextra -Werror
@@ -43,11 +39,8 @@ all: $(NAME)
 $(NAME): $(OBJS) ${HEADER} Makefile
 	ar rcs $(NAME) $(OBJS)
 
-bonus:	$(OBJS) $(BONUS_OBJS) ${HEADER} Makefile
-		@make "OBJS = $(BONUS_OBJS)" all
-
 clean:
-	rm -f $(OBJS) $(BONUS_OBJS)
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
