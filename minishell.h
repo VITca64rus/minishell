@@ -11,4 +11,7 @@ typedef struct s_data
 	struct s_data	*next;
 }	t_data;
 
+void	ft_lstadd_back(t_data **lst, t_data *new);
+t_data	*ft_parse(char *str);
+
 #endif
