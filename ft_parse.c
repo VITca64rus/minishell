@@ -13,7 +13,7 @@ t_data	*ft_parse(char *str)
 	while (*strs)
 	{
 		tmp = (t_data *)malloc(sizeof(t_data));
-		tmp->comands = ft_split(*strs, ' ');
+		tmp->comands = ft_split(*strs, ' '); // NOT RIGHT FOR echo "pine | $PATH" стоит проверять " ' перед первым сплитом
 		if (!tmp->comands)
 			return (NULL); //FIX_ME free all
 		ft_lstadd_back(&data, tmp);

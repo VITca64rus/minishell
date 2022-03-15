@@ -17,7 +17,7 @@ $(NAME) : $(OBJ) $(LIB)
 	$(CC) $(CFLAGS) $(OBJ) $(LIB) -o $(NAME) -ltermcap -lreadline
 
 %.o : %.c $(INCLUDES)
-	cc $(CFLAGS) -c $< -o $@ -ltermcap -lreadline
+	cc $(CFLAGS) -c $< -o $@
 
 clean :
 	rm -f $(OBJ)
