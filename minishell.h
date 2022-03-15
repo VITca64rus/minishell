@@ -7,7 +7,7 @@
 
 typedef struct s_data
 {
-	char			**tokens;
+	char			**comands;
 	struct s_data	*next;
 }	t_data;
 
