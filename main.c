@@ -40,7 +40,7 @@ void ft_print_data(t_data *data)
 			printf("%s ", *data->comands);
 			data->comands++;
 		}
-		printf("\n");
+		printf("%c\n", data->end_symbol);
 		data = data->next;
 	}
 }
@@ -61,7 +61,7 @@ int main(int argc, char **argv, char **env)
 				add_history(str);
 				printf("%s\n", str); // FIX_ME TEST
 				data = ft_parse(str);
-				ft_print_data(data); //FIX_ME TEST
+				ft_print_data(data);
 			}
 			free(str);
 		}
