@@ -46,3 +46,23 @@ t_data	*ft_parse(char *str)
 	}
 	return (data);
 }
+
+// int main()
+// {
+// 	t_data *data;
+
+// 	printf("====TEST1====\n");
+// 	data = ft_parse("ls -l | echo crab");
+// 	if (!strcmp(data->comands[0],"ls") && !strcmp(data->comands[1],"-l") && !strcmp(data->next->comands[0],"echo") && !strcmp(data->next->comands[1],"crab") )
+// 		printf("OK\n");
+// 	else
+// 		printf("NO\n");
+// 	printf("====TEST2====\n");
+// 	data = ft_parse("ls -l | echo \"crab | pipe\"");
+// 	if (!strcmp(data->comands[0],"ls") && !strcmp(data->comands[1],"-l") && !strcmp(data->next->comands[0],"echo") && !strcmp(data->next->comands[1],"crab | parse") )
+// 		printf("OK\n");
+// 	else
+// 	{
+// 		printf("NO\n");
+// 	}
+// }
