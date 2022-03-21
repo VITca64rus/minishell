@@ -6,7 +6,7 @@
 /*   By: sazelda <sazelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 10:22:46 by natalia           #+#    #+#             */
-/*   Updated: 2022/03/21 10:05:52 by sazelda          ###   ########.fr       */
+/*   Updated: 2022/03/21 20:08:00 by sazelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void   	ft_parsing(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if ((str[i] == '"') && (count_quotes % 2 == 0))
+		if ((str[i] == '"') && (count_quotes % 2 == 0) && str[i - 1] != '\\')
 			count_dquotes++;
-		else if ((str[i] == '\'') && (count_dquotes % 2 == 0))
+		else if ((str[i] == '\'') && (count_dquotes % 2 == 0) && str[i - 1] != '\\')
 			count_quotes++;
 		else if ((str[i] == ' ') && (count_quotes % 2 == 0) && (count_dquotes % 2 == 0))
 			printf("add for %d\n", i);
@@ -39,6 +39,6 @@ void   	ft_parsing(char *str)
 
 int main(void)
 {
-    char *str = "ls -l | 'echo pine apple'";
+    char *str = "ls -l | \"echo\\\" pine apple\"";
     ft_parsing(str);
 }
