@@ -45,30 +45,30 @@
 // 	}
 // }
 
-// int main(int argc, char **argv, char **env)
-// {
-// 	char	*str;
-// 	t_data	*data;
+int main(int argc, char **argv, char **env)
+{
+	char	*str;
+	t_data	*data;
 
-// 	str = NULL;
-// 	while(1)
-// 	{
-// 		str = readline("minishell> ");
-// 		if (str)
-// 		{
-// 			if (*str)
-// 			{
-// 				add_history(str);
-// 				printf("%s\n", str); // FIX_ME TEST
-// 				data = ft_parse(str);
-// 				ft_print_data(data);
-// 			}
-// 			free(str);
-// 		}
-// 		else
-// 		{
-// 			printf("\n");
-// 			break;
-// 		}
-// 	}
-// }
+	str = NULL;
+	while(1)
+	{
+		str = readline("minishell> ");
+		if (str)
+		{
+			if (*str)
+			{
+				add_history(str);
+				//printf("%s\n", str); // FIX_ME TEST
+				//data = ft_parse(str);
+				//ft_print_data(data);
+			}
+			free(str);
+		}
+		else
+		{
+			printf("\n");
+			break;
+		}
+	}
+}

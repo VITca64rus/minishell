@@ -1,7 +1,7 @@
 NAME	=	minishell
 CC		=	cc
 CFLAGS	=	#-Wall -Werror -Wextra
-SRC		=	main.c ft_lst.c ft_parse.c
+SRC		=	main.c ft_lst.c
 
 OBJ = $(patsubst %.c,%.o,$(SRC))
 INCLUDES = minishell.h
