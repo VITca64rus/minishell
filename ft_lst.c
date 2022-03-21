@@ -1,8 +1,8 @@
 #include "minishell.h"
 
-t_data	*ft_lstlast(t_data *lst)
+t_tokens	*ft_lstlast(t_tokens *lst)
 {
-	t_data	*last;
+	t_tokens	*last;
 
 	last = lst;
 	while (last && last->next)
@@ -11,9 +11,9 @@ t_data	*ft_lstlast(t_data *lst)
 }
 
 
-void	ft_lstadd_back(t_data **lst, t_data *new)
+void	ft_lstadd_back(t_tokens **lst, t_tokens *new)
 {
-	t_data	*end;
+	t_tokens	*end;
 
 	if (!*lst)
 		*lst = new;
