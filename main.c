@@ -31,44 +31,44 @@
 // 	}
 // }
 
-void ft_print_data(t_data *data)
-{
-	while (data)
-	{
-		while (*data->comands)
-		{
-			printf("%s ", *data->comands);
-			data->comands++;
-		}
-		printf("%c\n", data->end_symbol);
-		data = data->next;
-	}
-}
+// void ft_print_data(t_data *data)
+// {
+// 	while (data)
+// 	{
+// 		while (*data->comands)
+// 		{
+// 			printf("%s ", *data->comands);
+// 			data->comands++;
+// 		}
+// 		printf("%c\n", data->end_symbol);
+// 		data = data->next;
+// 	}
+// }
 
-int main(int argc, char **argv, char **env)
-{
-	char	*str;
-	t_data	*data;
+// int main(int argc, char **argv, char **env)
+// {
+// 	char	*str;
+// 	t_data	*data;
 
-	str = NULL;
-	while(1)
-	{
-		str = readline("minishell> ");
-		if (str)
-		{
-			if (*str)
-			{
-				add_history(str);
-				printf("%s\n", str); // FIX_ME TEST
-				data = ft_parse(str);
-				ft_print_data(data);
-			}
-			free(str);
-		}
-		else
-		{
-			printf("\n");
-			break;
-		}
-	}
-}
+// 	str = NULL;
+// 	while(1)
+// 	{
+// 		str = readline("minishell> ");
+// 		if (str)
+// 		{
+// 			if (*str)
+// 			{
+// 				add_history(str);
+// 				printf("%s\n", str); // FIX_ME TEST
+// 				data = ft_parse(str);
+// 				ft_print_data(data);
+// 			}
+// 			free(str);
+// 		}
+// 		else
+// 		{
+// 			printf("\n");
+// 			break;
+// 		}
+// 	}
+// }
