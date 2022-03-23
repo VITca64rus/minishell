@@ -6,7 +6,7 @@
 /*   By: sazelda <sazelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 10:22:46 by natalia           #+#    #+#             */
-/*   Updated: 2022/03/22 13:15:50 by sazelda          ###   ########.fr       */
+/*   Updated: 2022/03/23 10:56:27 by sazelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,23 @@ void   	ft_parsing(char *str)
 					new->next = tokens->next;
 					tokens->next = new;
 					break;
+		
 				}
 				else if ((tokens->str[i] == '|' || tokens->str[i] == '>' || tokens->str[i] == '<' ) && (i == 0) && (tokens->str[i + 1] != '\0'))
 				{
 					new = (t_tokens *)malloc(sizeof(t_tokens));
-					new->str = ft_strdup(&tokens->str[i + 1]);
-					tokens->str[i + 1] = '\0';
+					if (((tokens->str[i] == '>' && tokens->str[i + 1] == '>') || (tokens->str[i] == '<' && tokens->str[i + 1] == '<')))
+					{
+						if (tokens->str[i + 2] == '\0')
+							break;
+						new->str = ft_strdup(&tokens->str[i + 2]);
+						tokens->str[i + 2] = '\0';
+					}
+					else
+					{
+						new->str = ft_strdup(&tokens->str[i + 1]);
+						tokens->str[i + 1] = '\0';
+					}
 					new->next = tokens->next;
 					tokens->next = new;
 					break;
@@ -84,9 +95,10 @@ void   	ft_parsing(char *str)
 				i++;
 			}
 		}
-		//printf("%s\n", tokens->str);
 		tokens = tokens->next;
 	}
+
+	
 
 	while (tmp)
 	{
@@ -97,7 +109,7 @@ void   	ft_parsing(char *str)
 
 int main(void)
 {
-    char *str = "ls -l > file| \"echo\\\" pine | apple\"";
+    char *str = "ls -l>>file| \"echo\\\" pine | apple\"";
 	printf("TEST\n");
 	ft_parsing(str);
 	printf("STR = %s\n", str);

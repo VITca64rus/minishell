@@ -13,7 +13,8 @@ typedef struct s_tokens
 
 typedef struct s_data
 {
-	char			**comands;
+	char			*type;
+	char			**args;
 	struct s_data	*next;
 }	t_data;
 
