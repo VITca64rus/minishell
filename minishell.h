@@ -20,5 +20,6 @@ typedef struct s_data
 
 void	ft_lstadd_back(t_tokens **lst, t_tokens *new);
 t_data	*ft_parse(char *str);
+void	ft_lstadd_back1(t_data **lst, t_data *new);
 
 #endif

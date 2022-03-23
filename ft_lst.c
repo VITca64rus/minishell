@@ -23,3 +23,27 @@ void	ft_lstadd_back(t_tokens **lst, t_tokens *new)
 		end->next = new;
 	}
 }
+
+t_data	*ft_lstlast1(t_data *lst)
+{
+	t_data	*last;
+
+	last = lst;
+	while (last && last->next)
+		last = last->next;
+	return (last);
+}
+
+
+void	ft_lstadd_back1(t_data **lst, t_data *new)
+{
+	t_data	*end;
+
+	if (!*lst)
+		*lst = new;
+	else
+	{
+		end = ft_lstlast1(*lst);
+		end->next = new;
+	}
+}
