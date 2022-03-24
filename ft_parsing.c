@@ -6,7 +6,7 @@
 /*   By: sazelda <sazelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 10:22:46 by natalia           #+#    #+#             */
-/*   Updated: 2022/03/24 12:32:34 by sazelda          ###   ########.fr       */
+/*   Updated: 2022/03/24 12:36:05 by sazelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,12 +177,13 @@ void   	ft_parsing(char *str)
 	printf("TOKENS\n");
 	while (data)
 	{
+		printf("TYPE = %s\nARGS = ", data->type);
 		while (*data->args)
 		{
-			printf("%s ", *(data->args));
+			printf("%s, ", *(data->args));
 			data->args++;
 		}
-		printf("\n");
+		printf("\n---------------\n");
 		data = data->next;
 	}
 }
