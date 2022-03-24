@@ -6,12 +6,113 @@
 /*   By: sazelda <sazelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 10:22:46 by natalia           #+#    #+#             */
-/*   Updated: 2022/03/24 12:36:05 by sazelda          ###   ########.fr       */
+/*   Updated: 2022/03/24 14:10:56 by sazelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "minishell.h"
+
+void	ft_print_data(t_data *data)
+{
+	printf("TOKENS\n");
+	while (data)
+	{
+		printf("TYPE = %s\nARGS = ", data->type);
+		while (*data->args)
+		{
+			printf("%s, ", *(data->args));
+			data->args++;
+		}
+		printf("\n---------------\n");
+		data = data->next;
+	}
+}
+
+t_data	*ft_get_data(t_tokens *tmp)
+{
+	t_tokens	*tokens=NULL;
+	int i = 0;
+	
+	tokens = tmp;
+	t_data	*data = NULL;
+	t_data	*n;
+	i = 0;
+	while (tokens)
+	{
+		printf("%s\n", tokens->str);
+		if ((tokens->str[0] == '<' || tokens->str[0] == '>'))
+		{
+			if (i > 0)
+			{
+				printf("i = %d\n", i);
+				printf("TMP = %s\n", tmp->str);
+				n = (t_data *)malloc(sizeof(t_data));
+				n->args = (char **)malloc(sizeof(char *) * (i + 1));
+				i = 0;
+				while (tmp && tmp->str[0] != '<' && tmp->str[0] != '>')
+				{
+					n->args[i] = tmp->str;
+					i++;
+					tmp = tmp->next;
+				}
+				n->args[i] = NULL;
+				ft_lstadd_back1(&data, n);
+			}
+			n = (t_data *)malloc(sizeof(t_data));
+			n->type = tokens->str;
+			n->args = (char **)malloc(sizeof(char *) * 2);
+			n->args[0] = tokens->next->str;
+			n->args[1] = NULL;
+			ft_lstadd_back1(&data, n);
+			tokens = tokens->next;
+			tmp = tmp->next->next;
+			i = -1;
+		}
+		else if (tokens->str[0] == '|')
+		{
+			if (i > 0)
+			{
+				n = (t_data *)malloc(sizeof(t_data));
+				n->args = (char **)malloc(sizeof(char *) * (i + 1));
+				i = 0;
+				while (tmp && tmp->str[0] != '|')
+				{
+					n->args[i] = tmp->str;
+					i++;
+					tmp = tmp->next;
+				}
+				n->args[i] = NULL;
+				ft_lstadd_back1(&data, n);
+			}
+			n = (t_data *)malloc(sizeof(t_data));
+			n->type = tokens->str;
+			n->args = (char **)malloc(sizeof(char *) * 1);
+			n->args[0] = NULL;
+			ft_lstadd_back1(&data, n);
+			i = -1;
+			tmp = tmp->next;
+		}
+		tokens = tokens->next;
+		i++;
+	}
+	if (i > 0)
+	{
+		n = (t_data *)malloc(sizeof(t_data));
+		n->args = (char **)malloc(sizeof(char *) * (i + 1));
+		i = 0;
+		while (tmp && tmp->str[0] != '|')
+		{
+			n->args[i] = tmp->str;
+			i++;
+			tmp = tmp->next;
+		}
+		n->args[i] = NULL;
+		ft_lstadd_back1(&data, n);
+	}
+
+	return(data);
+}
 
 void   	ft_parsing(char *str)
 {
@@ -98,99 +199,14 @@ void   	ft_parsing(char *str)
 		tokens = tokens->next;
 	}
 
-	tokens = tmp;
 	t_data	*data = NULL;
-	t_data	*n;
-	i = 0;
-	while (tokens)
-	{
-		printf("%s\n", tokens->str);
-		if ((tokens->str[0] == '<' || tokens->str[0] == '>'))
-		{
-			if (i > 0)
-			{
-				printf("i = %d\n", i);
-				printf("TMP = %s\n", tmp->str);
-				n = (t_data *)malloc(sizeof(t_data));
-				n->args = (char **)malloc(sizeof(char *) * (i + 1));
-				i = 0;
-				while (tmp && tmp->str[0] != '<' && tmp->str[0] != '>')
-				{
-					n->args[i] = tmp->str;
-					i++;
-					tmp = tmp->next;
-				}
-				n->args[i] = NULL;
-				ft_lstadd_back1(&data, n);
-			}
-			n = (t_data *)malloc(sizeof(t_data));
-			n->type = tokens->str;
-			n->args = (char **)malloc(sizeof(char *) * 2);
-			n->args[0] = tokens->next->str;
-			n->args[1] = NULL;
-			ft_lstadd_back1(&data, n);
-			tokens = tokens->next;
-			tmp = tmp->next->next;
-			i = -1;
-		}
-		else if (tokens->str[0] == '|')
-		{
-			if (i > 0)
-			{
-				n = (t_data *)malloc(sizeof(t_data));
-				n->args = (char **)malloc(sizeof(char *) * (i + 1));
-				i = 0;
-				while (tmp && tmp->str[0] != '|')
-				{
-					n->args[i] = tmp->str;
-					i++;
-					tmp = tmp->next;
-				}
-				n->args[i] = NULL;
-				ft_lstadd_back1(&data, n);
-			}
-			n = (t_data *)malloc(sizeof(t_data));
-			n->type = tokens->str;
-			n->args = (char **)malloc(sizeof(char *) * 1);
-			n->args[0] = NULL;
-			ft_lstadd_back1(&data, n);
-			i = -1;
-			tmp = tmp->next;
-		}
-		tokens = tokens->next;
-		i++;
-	}
-	if (i > 0)
-	{
-		n = (t_data *)malloc(sizeof(t_data));
-		n->args = (char **)malloc(sizeof(char *) * (i + 1));
-		i = 0;
-		while (tmp && tmp->str[0] != '|')
-		{
-			n->args[i] = tmp->str;
-			i++;
-			tmp = tmp->next;
-		}
-		n->args[i] = NULL;
-		ft_lstadd_back1(&data, n);
-	}
-	printf("TOKENS\n");
-	while (data)
-	{
-		printf("TYPE = %s\nARGS = ", data->type);
-		while (*data->args)
-		{
-			printf("%s, ", *(data->args));
-			data->args++;
-		}
-		printf("\n---------------\n");
-		data = data->next;
-	}
+	data = ft_get_data(tmp);
+	ft_print_data(data);
 }
 
 int main(void)
 {
-    char *str = "<< infile ls -l >> file | echo pine | echo apple";
+    char *str = "<< infile ls -l >> file | echo 'pine | echo apple'";
 	printf("TEST\n");
 	ft_parsing(str);
 	printf("STR = %s\n", str);
