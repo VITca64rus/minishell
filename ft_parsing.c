@@ -6,7 +6,7 @@
 /*   By: sazelda <sazelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 10:22:46 by natalia           #+#    #+#             */
-/*   Updated: 2022/03/23 19:27:36 by sazelda          ###   ########.fr       */
+/*   Updated: 2022/03/24 09:39:32 by sazelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,73 +98,77 @@ void   	ft_parsing(char *str)
 		tokens = tokens->next;
 	}
 
-	
-	tokens = tmp;
-	t_data	*data = NULL;
-	t_data	*n;
-	//data = (t_data *)malloc(sizeof(t_data)); //FIX_ME !data
-	//data = NULL;
-	i = 0;
 	while (tmp)
 	{
 		printf("%s\n", tmp->str);
-		
-		if ((tmp->str[0] != '|') && (tmp->str[0] != '>') && (tmp->str[0] != '<'))
-		{
-			i++;
-			tmp = tmp->next;
-		}
-		else
-		{
-			n = (t_data *)malloc(sizeof(t_data));
-			n->args = (char **)malloc(sizeof(char *) * (i + 1));
-			i = 0;
-			tmp = tokens;
-			while (tmp && (tmp->str[0] != '|') && (tmp->str[0] != '>') && (tmp->str[0] != '<'))
-			{
-				n->args[i] = tmp->str;
-				i++;
-				tmp = tmp->next;
-			}
-			n->args[i] = NULL;
-			ft_lstadd_back1(&data, n);
-			i = 0;
-			n = (t_data *)malloc(sizeof(t_data));
-			n->args = (char **)malloc(sizeof(char *) * 1);
-			n->args[0] = tmp->str;
-			ft_lstadd_back1(&data, n);
-			tmp = tmp->next;
-			tokens = tmp;
-		}
-	}
-	n = (t_data *)malloc(sizeof(t_data));
-	n->args = (char **)malloc(sizeof(char *) * (i + 1));
-	tmp = tokens;
-	i = 0;
-	while (tmp && (tmp->str[0] != '|') && (tmp->str[0] != '>') && (tmp->str[0] != '<'))
-	{
-		n->args[i] = tmp->str;
-		i++;
 		tmp = tmp->next;
 	}
-	n->args[i] = NULL;
-	ft_lstadd_back1(&data, n);
-	printf("TOKENS\n");
-	while (data)
-	{
-		while (*data->args)
-		{
-			printf("%s ", *(data->args));
-			data->args++;
-		}
-		printf("\n");
-		data = data->next;
-	}
+	// tokens = tmp;
+	// t_data	*data = NULL;
+	// t_data	*n;
+	// //data = (t_data *)malloc(sizeof(t_data)); //FIX_ME !data
+	// //data = NULL;
+	// i = 0;
+	// while (tmp)
+	// {
+	// 	printf("%s\n", tmp->str);
+		
+	// 	if ((tmp->str[0] != '|') && (tmp->str[0] != '>') && (tmp->str[0] != '<'))
+	// 	{
+	// 		i++;
+	// 		tmp = tmp->next;
+	// 	}
+	// 	else
+	// 	{
+	// 		n = (t_data *)malloc(sizeof(t_data));
+	// 		n->args = (char **)malloc(sizeof(char *) * (i + 1));
+	// 		i = 0;
+	// 		tmp = tokens;
+	// 		while (tmp && (tmp->str[0] != '|') && (tmp->str[0] != '>') && (tmp->str[0] != '<'))
+	// 		{
+	// 			n->args[i] = tmp->str;
+	// 			i++;
+	// 			tmp = tmp->next;
+	// 		}
+	// 		n->args[i] = NULL;
+	// 		ft_lstadd_back1(&data, n);
+	// 		i = 0;
+	// 		n = (t_data *)malloc(sizeof(t_data));
+	// 		n->args = (char **)malloc(sizeof(char *) * 1);
+	// 		n->args[0] = tmp->str;
+	// 		ft_lstadd_back1(&data, n);
+	// 		tmp = tmp->next;
+	// 		tokens = tmp;
+	// 	}
+	// }
+	// n = (t_data *)malloc(sizeof(t_data));
+	// n->args = (char **)malloc(sizeof(char *) * (i + 1));
+	// tmp = tokens;
+	// i = 0;
+	// while (tmp && (tmp->str[0] != '|') && (tmp->str[0] != '>') && (tmp->str[0] != '<'))
+	// {
+	// 	n->args[i] = tmp->str;
+	// 	i++;
+	// 	tmp = tmp->next;
+	// }
+	// n->args[i] = NULL;
+	// ft_lstadd_back1(&data, n);
+	// printf("TOKENS\n");
+	// while (data)
+	// {
+	// 	while (*data->args)
+	// 	{
+	// 		printf("%s ", *(data->args));
+	// 		data->args++;
+	// 	}
+	// 	printf("\n");
+	// 	data = data->next;
+	// }
 }
 
 int main(void)
 {
-    char *str = "ls -l >> file | \"echo\\\" pine | apple\"";
+    char *str = "<< infile ls -l >> file | echo pine | apple";
 	printf("TEST\n");
 	ft_parsing(str);
 	printf("STR = %s\n", str);
