@@ -2,26 +2,20 @@
 
 t_tokens	*ft_lstlast(t_tokens *lst)
 {
-	t_tokens	*last;
-
-	last = lst;
-	while (last && last->next)
-		last = last->next;
-	return (last);
+	while (lst && lst->next)
+		lst = lst->next;
+	return (lst);
 }
-
 
 void	ft_lstadd_back(t_tokens **lst, t_tokens *new)
 {
-	t_tokens	*end;
+	t_tokens	*last;
 
-	if (!*lst)
-		*lst = new;
+	last = ft_lstlast(*lst);
+	if (last)
+		last->next = new;
 	else
-	{
-		end = ft_lstlast(*lst);
-		end->next = new;
-	}
+		*lst = new;
 }
 
 t_data	*ft_lstlast1(t_data *lst)

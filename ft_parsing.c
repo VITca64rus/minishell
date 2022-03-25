@@ -120,7 +120,7 @@ void   	ft_parsing(char *str)
 	int	count_quotes;
 	int	count_dquotes;
 	int	start;
-	t_tokens	*tokens=NULL;
+	t_tokens	*tokens = NULL;
 	t_tokens	*new;
 	t_tokens	*tmp;
 
@@ -136,10 +136,10 @@ void   	ft_parsing(char *str)
 			count_quotes++;
 		else if ((str[i] == ' ') && (count_quotes % 2 == 0) && (count_dquotes % 2 == 0))
 		{
-			printf("add for %d\n", i);
 			new = (t_tokens *)malloc(sizeof(t_tokens));
 			new->str = ft_strdup(str);
 			new->str[i] = '\0';
+			new->next = NULL;
 			ft_lstadd_back(&tokens, new);
 			str = &str[i+1];
 			i = -1;
@@ -148,10 +148,10 @@ void   	ft_parsing(char *str)
 	}
 	if (count_quotes % 2 == 0 && count_dquotes % 2 == 0)
 	{
-		printf("add for %d\n", i);
 		new = (t_tokens *)malloc(sizeof(t_tokens));
 		new->str = ft_strdup(str);
 		new->str[i] = '\0';
+		new->next = NULL;
 		ft_lstadd_back(&tokens, new);
 	}
 	else
@@ -206,7 +206,8 @@ void   	ft_parsing(char *str)
 
 int main(void)
 {
-    char *str = "<< infile ls -l >> file | echo 'pine | echo apple'";
+    char *str;
+	str = ft_strdup("<< infile ls -l > file| echo 'pine | echo apple'");
 	printf("TEST\n");
 	ft_parsing(str);
 	printf("STR = %s\n", str);
