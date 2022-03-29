@@ -6,7 +6,7 @@
 /*   By: sazelda <sazelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 10:22:46 by natalia           #+#    #+#             */
-/*   Updated: 2022/03/29 11:22:17 by sazelda          ###   ########.fr       */
+/*   Updated: 2022/03/29 11:29:19 by sazelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_print_data(t_data *data)
 char	*ft_get_type(char *str)
 {
 	int		i;
-	char	*arr[] = {"echo", "cd", NULL};
+	char	*arr[] = {"echo", "cd", "pwd", "export", "unset", "env", "exit", NULL};
 
 	i = 0;
 	while (arr[i])
