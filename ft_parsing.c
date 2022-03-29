@@ -6,7 +6,7 @@
 /*   By: sazelda <sazelda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 10:22:46 by natalia           #+#    #+#             */
-/*   Updated: 2022/03/24 14:10:56 by sazelda          ###   ########.fr       */
+/*   Updated: 2022/03/29 11:22:17 by sazelda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,21 @@ void	ft_print_data(t_data *data)
 		printf("\n---------------\n");
 		data = data->next;
 	}
+}
+
+char	*ft_get_type(char *str)
+{
+	int		i;
+	char	*arr[] = {"echo", "cd", NULL};
+
+	i = 0;
+	while (arr[i])
+	{
+		if (!strcmp(arr[i], str))
+			return("BUILTINS");
+		i++;
+	}
+	return("COMMAND");
 }
 
 t_data	*ft_get_data(t_tokens *tmp)
@@ -57,6 +72,7 @@ t_data	*ft_get_data(t_tokens *tmp)
 					tmp = tmp->next;
 				}
 				n->args[i] = NULL;
+				n->type = ft_get_type(n->args[0]);
 				ft_lstadd_back1(&data, n);
 			}
 			n = (t_data *)malloc(sizeof(t_data));
@@ -108,6 +124,7 @@ t_data	*ft_get_data(t_tokens *tmp)
 			tmp = tmp->next;
 		}
 		n->args[i] = NULL;
+		n->type = ft_get_type(n->args[0]);
 		ft_lstadd_back1(&data, n);
 	}
 
