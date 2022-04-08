@@ -6,6 +6,8 @@
 # include <fcntl.h>
 # include <string.h>
 # include "libft/libft.h"
+#include <sys/types.h>
+#include <sys/wait.h>
 
 typedef struct s_tokens
 {

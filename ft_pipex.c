@@ -14,20 +14,13 @@
 
 char	*ft_find_path_in_envp(char **envp)
 {
-	char	*path_envp;
-
-	path_envp = NULL;
 	while (envp != 0)
 	{
-		if (ft_strncmp("PATH=", *envp, 5) == 0)
-		{
-			path_envp = *(envp);
-			path_envp = &path_envp[5];
-			break ;
-		}
+		if (!ft_strncmp("PATH=", *envp, 5))
+			return (&(*envp[5]));
 		envp++;
 	}
-	return (path_envp);
+    return (NULL);
 }
 
 char	**ft_find_path(char **envp)
@@ -176,3 +169,41 @@ int		ft_pipex(t_info *store, char *here_doc_name, t_data *data, char **envp)
 	//ft_free_arg(pipex->paths);
     return(0);
 }
+
+void	ft_init_store(t_data *data, t_info *store)
+{
+	int i;
+	while (data)
+	{
+		if (!strcmp(data->type, "<<")) //написать свою strcmp
+			store->here_doc += 1;
+		if (!strcmp(data->type, "COMMAND"))
+			store->command += 1;
+		if (!strcmp(data->type, "|"))
+			store->pipe += 1;
+		data = data->next;
+	}
+	
+}
+void	ft_creating_procces(t_data *data, char **envp)
+{
+	int i;
+	char *here_doc_name;
+	
+	t_info *store;
+	store = (t_info *)malloc(sizeof(t_info));
+	i = 0;
+	ft_init_store(data, store);
+	ft_pipex(store, here_doc_name, data, envp);
+}
+
+// int main(int argc, char **argv, char **envp)
+// {
+//     char *str;
+// 	t_data *data;
+// 	str = ft_strdup("< infile.txt cat | wc -l > outfile.txt");
+// 	//str = ft_strdup("<< infile ls -l > file| echo 'pine | echo apple'");
+// 	data = ft_parsing(str);
+// 	ft_creating_procces(data, envp);
+// 	//printf("STR = %s\n", str);
+// }
