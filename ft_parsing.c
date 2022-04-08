@@ -3,26 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sazelda <sazelda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 10:22:46 by natalia           #+#    #+#             */
-/*   Updated: 2022/03/29 11:29:19 by sazelda          ###   ########.fr       */
+/*   Updated: 2022/04/05 22:29:33 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <string.h>
 #include "minishell.h"
 
 void	ft_print_data(t_data *data)
 {
+	int i;
+
 	printf("TOKENS\n");
 	while (data)
 	{
 		printf("TYPE = %s\nARGS = ", data->type);
-		while (*data->args)
+		i = 0;
+		while (data->args[i])
 		{
-			printf("%s, ", *(data->args));
-			data->args++;
+			printf("%s, ", data->args[i]);
+			i++;
 		}
 		printf("\n---------------\n");
 		data = data->next;
@@ -99,6 +103,7 @@ t_data	*ft_get_data(t_tokens *tmp)
 					tmp = tmp->next;
 				}
 				n->args[i] = NULL;
+				n->type = ft_get_type(n->args[0]);
 				ft_lstadd_back1(&data, n);
 			}
 			n = (t_data *)malloc(sizeof(t_data));
@@ -131,7 +136,7 @@ t_data	*ft_get_data(t_tokens *tmp)
 	return(data);
 }
 
-void   	ft_parsing(char *str)
+t_data	*ft_parsing(char *str)
 {
 	int	i;
 	int	count_quotes;
@@ -219,13 +224,45 @@ void   	ft_parsing(char *str)
 	t_data	*data = NULL;
 	data = ft_get_data(tmp);
 	ft_print_data(data);
+	return(data);
 }
 
-int main(void)
+void	ft_init_store(t_data *data, t_info *store)
+{
+	int i;
+	while (data)
+	{
+		if (!strcmp(data->type, "<<")) //написать свою strcmp
+			store->here_doc += 1;
+		if (!strcmp(data->type, "COMMAND"))
+			store->command += 1;
+		if (!strcmp(data->type, "|"))
+			store->pipe += 1;
+		data = data->next;
+	}
+	
+}
+void	ft_creating_procces(t_data *data, char **envp)
+{
+	int i;
+	char *here_doc_name;
+	
+	t_info *store;
+	store = (t_info *)malloc(sizeof(t_info));
+	i = 0;
+	ft_init_store(data, store);
+	ft_pipex(store, here_doc_name, data, envp);
+}
+
+int main(int argc, char **argv, char **envp)
 {
     char *str;
-	str = ft_strdup("<< infile ls -l > file| echo 'pine | echo apple'");
-	printf("TEST\n");
-	ft_parsing(str);
-	printf("STR = %s\n", str);
+	t_data *data;
+	str = ft_strdup("< infile.txt cat | wc -l > outfile.txt");
+	//str = ft_strdup("<< infile ls -l > file| echo 'pine | echo apple'");
+	data = ft_parsing(str);
+	ft_creating_procces(data, envp);
+	//printf("STR = %s\n", str);
 }
+
+
