@@ -37,6 +37,20 @@ typedef struct	s_info
 	pid_t	pid;
 }				t_pipex;
 
+typedef struct s_redirs
+{
+	char *filename;
+	int mode;
+} t_redirs;
+
+typedef struct s_comnds
+{
+	t_redirs	**redirs;
+	t_list		*args;
+	//t_envars 	*envs;
+} t_comnds;
+
+// command parser
 
 void	ft_lstadd_back(t_tokens **lst, t_tokens *new);
 t_data	*ft_parse(char *str);
@@ -48,5 +62,9 @@ char	**ft_comands_for_full_path(char *cmd, char **comands);
 void	parent_process(int pipefd[2], char **cmd2, t_pipex *data, char **envp);
 void	ft_check_comand(char **cmd1, char ***comands, \
 						char **path, t_pipex **data);
+t_comnds	**ft_search_command(t_data *data, char **envp);
+void	execute_bin(t_data *data, char **comands, char **envp);
+int		ft_pipes_redirects(t_data *data);
+void	execute_command(t_data *data, char **commands, char **envp);
 
 #endif
