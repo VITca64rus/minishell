@@ -6,7 +6,11 @@
 /*   By: hvayon <hvayon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 10:22:46 by natalia           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/04/17 13:42:37 by hvayon           ###   ########.fr       */
+=======
+/*   Updated: 2022/05/31 21:03:06 by hvayon           ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,10 +235,14 @@ int main(int argc, char **argv, char **envp)
 {
     char *str;
 	t_data *data;
-	str = ft_strdup("< infile.txt cat | wc -l > outfile.txt");
-	//str = ft_strdup("<< infile ls -l > file| echo 'pine | echo apple'");
+	// str = ft_strdup("< infile.txt cat | wc -l > outfile.txt");
+	str = ft_strdup("<< infile ls -l > file| echo 'pine | echo apple'");
 	data = ft_parsing(str);
+<<<<<<< HEAD
 	ft_search_command(data, envp);
+=======
+	lexical_analyzer(data);
+>>>>>>> main
 	printf("STR = %s\n", str);
 }
 
