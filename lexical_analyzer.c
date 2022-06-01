@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexical_analyzer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hvayon <hvayon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:16:54 by hvayon            #+#    #+#             */
-/*   Updated: 2022/05/31 21:06:24 by hvayon           ###   ########.fr       */
+/*   Updated: 2022/06/01 23:26:14 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,3 +46,5 @@ void lexical_analyzer(t_data *data)
 		data = data->next;
 	}
 }
+
+
