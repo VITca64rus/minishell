@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hvayon <hvayon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 10:22:46 by natalia           #+#    #+#             */
-/*   Updated: 2022/04/05 22:29:33 by natalia          ###   ########.fr       */
+/*   Updated: 2022/05/31 21:22:11 by hvayon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,9 +231,10 @@ int main(int argc, char **argv, char **envp)
 {
     char *str;
 	t_data *data;
-	str = ft_strdup("< infile.txt cat | wc -l > outfile.txt");
-	//str = ft_strdup("<< infile ls -l > file| echo 'pine | echo apple'");
+	// str = ft_strdup("< infile.txt cat | wc -l > outfile.txt");
+	str = ft_strdup("<< infile ls -l > file| echo 'pine | echo apple'");
 	data = ft_parsing(str);
+	lexical_analyzer(data);
 	printf("STR = %s\n", str);
 }
 
