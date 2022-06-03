@@ -1,0 +1,24 @@
+total 272
+drwxr-xr-x  23 natalia  staff    736  3 июн 20:45 .
+drwx------@ 28 natalia  staff    896  3 июн 17:38 ..
+drwxr-xr-x  14 natalia  staff    448  1 июн 23:26 .git
+-rw-r--r--   1 natalia  staff      5  1 июн 23:20 .gitignore
+-rw-r--r--   1 natalia  staff   1074  1 июн 23:20 LICENSE
+-rw-r--r--   1 natalia  staff    577  2 июн 22:21 Makefile
+-rw-r--r--   1 natalia  staff     58  1 июн 23:20 README.md
+-rwxr-xr-x   1 natalia  staff      0  3 июн 20:45 file.txt
+-rw-r--r--   1 natalia  staff   1452  1 июн 23:22 ft_lst.c
+-rw-r--r--   1 natalia  staff   1296  3 июн 20:27 ft_lst.o
+-rw-r--r--   1 natalia  staff   6459  3 июн 20:45 ft_parsing.c
+-rw-r--r--   1 natalia  staff   5664  3 июн 20:45 ft_parsing.o
+-rw-r--r--   1 natalia  staff   5729  3 июн 20:41 ft_pipex.c
+-rw-r--r--   1 natalia  staff   5368  3 июн 20:41 ft_pipex.o
+-rw-r--r--   1 natalia  staff   1148  2 июн 22:20 ft_pipex_utils.c
+-rw-r--r--   1 natalia  staff    840  3 июн 20:27 ft_pipex_utils.o
+-rw-r--r--   1 natalia  staff     18  1 июн 23:20 infile.txt
+-rw-r--r--   1 natalia  staff   1644  2 июн 21:45 lexical_analyzer.c
+-rw-r--r--   1 natalia  staff   1128  3 июн 20:27 lexical_analyzer.o
+drwxr-xr-x  83 natalia  staff   2656  3 июн 20:27 libft
+-rwxr-xr-x   1 natalia  staff  51632  3 июн 20:45 minishell
+-rw-r--r--   1 natalia  staff   1006  3 июн 19:44 minishell.h
+-rwxr-xr-x   1 natalia  staff      9  3 июн 20:41 outfile.txt
