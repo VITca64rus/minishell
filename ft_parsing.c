@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hvayon <hvayon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 10:22:46 by natalia           #+#    #+#             */
-/*   Updated: 2022/05/31 21:22:11 by hvayon           ###   ########.fr       */
+/*   Updated: 2022/06/03 20:45:28 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,15 +227,48 @@ t_data	*ft_parsing(char *str)
 	return(data);
 }
 
+t_info *ft_init_info(t_data *data)
+{
+	t_info *info;
+	int i;
+	int	j;
+	int c;
+
+	i = 0;
+	j = 0;
+	c = 0;
+	info = (t_info *)malloc(sizeof(t_info));;
+	while(data)
+	{
+		if (!(strcmp(data->type, "COMMAND"))) 
+			i++;
+		if (strcmp(data->type, "COMMAND"))
+			j++;
+		if (!(strcmp(data->type, "BUILTINS")))
+			c++;
+		data = data->next;
+	}
+	info->num_command = i;
+	info->num_type = j;
+	info->num_builtins = c;
+	return(info);
+}
+
 int main(int argc, char **argv, char **envp)
 {
     char *str;
 	t_data *data;
-	// str = ft_strdup("< infile.txt cat | wc -l > outfile.txt");
-	str = ft_strdup("<< infile ls -l > file| echo 'pine | echo apple'");
+	t_info *info;
+	str = ft_strdup("< infile.txt cat | wc -l | ls -la > file.txt");
+	//str = ft_strdup("<< infile ls -l > file| echo 'pine | echo apple'");
 	data = ft_parsing(str);
-	lexical_analyzer(data);
+	//---считаем кол-во команд и типов---
+	info = ft_init_info(data);
+	//---называем каждый символ----
+	//-----найти path команды для выполнения-----
 	printf("STR = %s\n", str);
+	//----pipex---
+	ft_pipex(data, info, envp);
 }
 
 

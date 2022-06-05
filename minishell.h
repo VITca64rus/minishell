@@ -31,9 +31,29 @@ typedef struct s_data
 	struct s_data	*next;
 }	t_data;
 
+typedef struct s_info
+{
+	int		num_command;
+	int		num_type;
+	int		num_builtins;
+}	t_info;
+
+//----pipex---
+
+typedef struct s_prompt
+{
+	char	**paths;
+	int		infile;
+	int		outfile;
+	pid_t	pid;
+	int		here_doc;
+}				t_prompt;
+
+
 void	ft_lstadd_back(t_tokens **lst, t_tokens *new);
 t_data	*ft_parse(char *str);
 void	ft_lstadd_back1(t_data **lst, t_data *new);
-void lexical_analyzer(t_data *data);
+void	lexical_analyzer(t_data *data, t_info *info);
+int		ft_pipex(t_data *data, t_info *info, char **envp);
 
 #endif
