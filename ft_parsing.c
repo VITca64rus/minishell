@@ -259,16 +259,17 @@ int main(int argc, char **argv, char **envp)
     char *str;
 	t_data *data;
 	t_info *info;
-	str = ft_strdup("< infile.txt cat | wc -l | ls -la > file.txt");
+	str = ft_strdup("echo sadh     dd");
 	//str = ft_strdup("<< infile ls -l > file| echo 'pine | echo apple'");
 	data = ft_parsing(str);
+	echo(data[0]);
 	//---считаем кол-во команд и типов---
-	info = ft_init_info(data);
-	//---называем каждый символ----
-	//-----найти path команды для выполнения-----
-	printf("STR = %s\n", str);
-	//----pipex---
-	ft_pipex(data, info, envp);
+	// info = ft_init_info(data);
+	// //---называем каждый символ----
+	// //-----найти path команды для выполнения-----
+	// printf("STR = %s\n", str);
+	// //----pipex---
+	// ft_pipex(data, info, envp);
 }
 
 

@@ -2,7 +2,7 @@ NAME	=	minishell
 CC		=	cc
 CFLAGS	=	#-Wall -Werror -Wextra
 SRC		=	ft_parsing.c ft_lst.c lexical_analyzer.c ft_pipex.c \
-			ft_pipex_utils.c \
+			ft_pipex_utils.c builtins.c\
 
 OBJ = $(patsubst %.c,%.o,$(SRC))
 INCLUDES = minishell.h

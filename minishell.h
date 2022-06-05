@@ -55,5 +55,6 @@ t_data	*ft_parse(char *str);
 void	ft_lstadd_back1(t_data **lst, t_data *new);
 void	lexical_analyzer(t_data *data, t_info *info);
 int		ft_pipex(t_data *data, t_info *info, char **envp);
+void	echo(t_data el);
 
 #endif
